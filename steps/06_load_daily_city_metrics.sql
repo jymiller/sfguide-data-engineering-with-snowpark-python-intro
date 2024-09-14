@@ -14,6 +14,7 @@ USE WAREHOUSE HOL_WH;
 USE SCHEMA HOL_DB.HOL_SCHEMA;
 
 
+
 -- ----------------------------------------------------------------------------
 -- Step 1: Create the stored procedure to load DAILY_CITY_METRICS
 -- ----------------------------------------------------------------------------
@@ -39,7 +40,7 @@ def main(session: Session) -> str:
 
     # Define the tables
     order_detail = session.table("ORDER_DETAIL")
-    history_day = session.table("FROSTBYTE_WEATHERSOURCE.ONPOINT_ID.HISTORY_DAY")
+    history_day = session.table("WEATHER_SOURCE_LLC_FROSTBYTE.ONPOINT_ID.HISTORY_DAY")
     location = session.table("LOCATION")
 
     # Join the tables
@@ -79,7 +80,7 @@ $$;
 -- ----------------------------------------------------------------------------
 -- Step 2: Load the DAILY_CITY_METRICS table
 -- ----------------------------------------------------------------------------
-
+select current_role();
 CALL LOAD_DAILY_CITY_METRICS_SP();
 
 SELECT * FROM DAILY_CITY_METRICS;
